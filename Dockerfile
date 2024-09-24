@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM docker.io/amd64/ubuntu:22.04
 
 ENV VNC_PASSWORD=123_567
 ENV DEBIAN_FRONTEND=noninteractive \
