@@ -54,10 +54,10 @@ RUN  apt-get update && \
         && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
 
-# RUN pip3 \
-#         install \
-#         --no-cache-dir \
-#         azure-cli==2.61.0
+RUN pip3 \
+        install \
+        --no-cache-dir \
+        azure-cli==2.64.0
 
 # fix terminal in xfce
 RUN update-alternatives --set x-terminal-emulator /usr/bin/xfce4-terminal.wrapper
