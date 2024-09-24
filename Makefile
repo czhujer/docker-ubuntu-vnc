@@ -3,6 +3,7 @@
 podman-run:
 	podman \
 		run \
+		--platform linux/amd64 \
 		-v ~/.kube:/root/.kube \
 		-v ~/.azure:/root/.azure \
 		--rm \
