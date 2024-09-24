@@ -27,14 +27,17 @@ RUN echo "$VNC_PASSWORD" > /root/plain_passwd.txt && \
 
 # https://learn.microsoft.com/en-us/azure/vpn-gateway/point-to-site-entra-vpn-client-linux
 # Install Microsoft's public key
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN curl -sSl https://packages.microsoft.com/keys/microsoft.asc | tee /etc/apt/trusted.gpg.d/microsoft.asc
+RUN /bin/bash \
+        -o pipefail \
+        -c "curl -sSl https://packages.microsoft.com/keys/microsoft.asc | tee /etc/apt/trusted.gpg.d/microsoft.asc"
 
 
 # Install the production repo list for jammy
 # For Ubuntu 22.04
-RUN curl https://packages.microsoft.com/config/ubuntu/22.04/prod.list | tee /etc/apt/sources.list.d/microsoft-ubuntu-jammy-prod.list
-
+# hadolint ignore=DL3059
+RUN /bin/bash \
+        -o pipefail \
+        -c "curl https://packages.microsoft.com/config/ubuntu/22.04/prod.list | tee /etc/apt/sources.list.d/microsoft-ubuntu-jammy-prod.list"
 
 # hadolint ignore=DL3008
 RUN  apt-get update && \
@@ -49,7 +52,7 @@ RUN  apt-get update && \
         software-properties-common \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
-#         microsoft-azurevpnclient \
+    #  microsoft-azurevpnclient \
 
 # RUN pip3 \
 #         install \
@@ -60,6 +63,7 @@ RUN update-alternatives --set x-terminal-emulator /usr/bin/xfce4-terminal.wrappe
 
 # firefox install
 #
+# hadolint ignore=DL4006,SC2028
 RUN \
     add-apt-repository ppa:mozillateam/ppa && \
     echo "\n\
