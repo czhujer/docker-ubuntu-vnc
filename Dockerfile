@@ -50,12 +50,13 @@ RUN  apt-get update && \
         zenity-common \
         wget \
         software-properties-common \
-     && apt-get clean \
+        microsoft-azurevpnclient \
+        && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
-    #  microsoft-azurevpnclient \
 
 # RUN pip3 \
 #         install \
+#         --no-cache-dir \
 #         azure-cli==2.61.0
 
 # fix terminal in xfce
