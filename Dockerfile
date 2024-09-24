@@ -27,6 +27,7 @@ RUN echo "$VNC_PASSWORD" > /root/plain_passwd.txt && \
 
 # https://learn.microsoft.com/en-us/azure/vpn-gateway/point-to-site-entra-vpn-client-linux
 # Install Microsoft's public key
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -sSl https://packages.microsoft.com/keys/microsoft.asc | tee /etc/apt/trusted.gpg.d/microsoft.asc
 
 
@@ -70,6 +71,7 @@ RUN \
         Pin-Priority: -1\n\
         " | tee /etc/apt/preferences.d/mozilla-firefox
 
+# hadolint ignore=DL3008
 RUN apt-get update && \
     apt-get install \
     -y \
